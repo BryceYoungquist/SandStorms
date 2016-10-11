@@ -19,6 +19,7 @@ void strafeRight(int speed){
 
 task main()
 {
+	while (true){
 motor[TL] = vexRT[Ch3];
 motor[BL] = vexRT[Ch3];
 motor[TR] = vexRT[Ch2];
@@ -31,4 +32,4 @@ motor[BR] = vexRT[Ch2];
 	if(vexRT[Btn5U] == 1)
 		strafeRight(127);
 
-}
+}}
