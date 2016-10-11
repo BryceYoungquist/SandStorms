@@ -44,10 +44,10 @@ int driverControlModeCount = 1;
 void DriverControls(){
 
 
-	motor[FL] = 127;
+/*	motor[FL] = 127;
 	motor[BR] =127;
 	motor[FR] =127;
-	motor[BL] =127;
+	motor[BL] =127;*/
 	if( vexRT[ Btn6U ] == 1)
 	{
 		motor[TLA] =127;
