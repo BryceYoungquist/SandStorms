@@ -106,6 +106,18 @@ void clearLCD ()
 //////////////////////////////////////////////autonomous
 void autonomous1 ()
 {
+
+		motor[FL] = 127;
+		motor[FR] = 127;
+		motor[BL] = 127;
+		motor[BR] = 127;
+		wait1Msec(5000);
+
+		motor[TLA] = 127;
+		motor[TRA] = 127;
+		motor[BLA] = 127;
+		motor[BRA] = 127;
+		wait1Msec(500);
 }
 void autonomous2 ()
 {
