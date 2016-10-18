@@ -35,6 +35,11 @@
 #pragma userControlDuration(120)
 
 #include "Vex_Competition_Includes.c"
+
+float degToRad(float deg) {
+return (deg/180)*PI;
+}
+
 float mecSpeed(int side, float speed, float angle, float turn) {
 	writeDebugStreamLine("%d",speed*sin(angle+(PI/4))+turn);
 	if(side == 0) {
@@ -60,6 +65,15 @@ float angle = stickAngle(VexRT[Ch1],vexRT[Ch2]);
 int autonomousMode = 1;
 int driverControlModeCount = 1;
 
+void driveDirectipon(float dspeed, float dangle, float dturn){
+	motor[FL] = mecSpeed(0,dspeed,dangle,dturn);
+	motor[BR] = mecSpeed(0,dspeed,dangle,-1*dturn);
+	motor[FR] = mecSpeed(1,dspeed,dangle,-1*dturn);
+	motor[BL] = mecSpeed(1,dspeed,dangle,dturn);
+}
+
+//driveDirection(127,degToRad(90),0); // -1/2PI to got left
+
 //////////////////////////////////////////////DriverControl
 void DriverControls(){
 
@@ -68,19 +82,14 @@ void DriverControls(){
 	motor[FR] = mecSpeed(1,nSpeed*baseSpeed,angle,-27*vexRT[Ch4]/127);
 	motor[BL] = mecSpeed(1,nSpeed*baseSpeed,angle,27*vexRT[Ch4]/127);
 
-
-
-
-
-
-	if( vexRT[ Btn6U ] == 1)
+	if( vexRT[ Btn6D ] == 1)
 	{
 		motor[TLA] =127;
 		motor[TRA] = 127;
 		motor[BLA] = 127;
 		motor[BRA] = 127;
 	}
-	else if(vexRT[ Btn6D ] ==1)
+	else if(vexRT[ Btn6U ] ==1)
 	{
 		motor[TLA] = -127;
 		motor[TRA] = -127;
@@ -107,17 +116,21 @@ void clearLCD ()
 void autonomous1 ()
 {
 
-		motor[FL] = 127;
-		motor[FR] = 127;
-		motor[BL] = 127;
-		motor[BR] = 127;
+		motor[FL] = -60;
+		motor[FR] = 60;
+		motor[BL] = 60;
+		motor[BR] = 60;
 		wait1Msec(5000);
 
-		motor[TLA] = 127;
+		/*motor[TLA] = 127;
 		motor[TRA] = 127;
 		motor[BLA] = 127;
 		motor[BRA] = 127;
-		wait1Msec(500);
+		wait1Msec(500);*/
+
+		driveDirectipon(60,degToRad(90.0),0);
+		wait1Msec(10000);
+
 }
 void autonomous2 ()
 {
