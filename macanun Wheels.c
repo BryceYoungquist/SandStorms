@@ -1,5 +1,7 @@
-
-
+#pragma config(Sensor, dgtl1,  ATR,            sensorNone)
+#pragma config(Sensor, dgtl2,  ATL,            sensorNone)
+#pragma config(Sensor, dgtl11, ABR,            sensorNone)
+#pragma config(Sensor, dgtl12, ABL,            sensorNone)
 #pragma config(Motor,  port2,           BL,            tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port3,           BR,            tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port8,           FR,            tmotorVex393_MC29, openLoop, reversed)
@@ -27,7 +29,7 @@ float pointDistance(float x1,float y1,float x2,float y2) {
 
 
 task main()
-{
+
 
 
 
@@ -44,6 +46,10 @@ while(true) {
 	motor[BR] = mecSpeed(0,nSpeed*baseSpeed,angle,-27*vexRT[Ch4]/127);
 	motor[FR] = mecSpeed(1,nSpeed*baseSpeed,angle,-27*vexRT[Ch4]/127);
 	motor[BL] = mecSpeed(1,nSpeed*baseSpeed,angle,27*vexRT[Ch4]/127);
+
+	if(vexRT[Btn6D] == 1)
+
+
 }
 
 
