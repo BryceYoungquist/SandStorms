@@ -37,17 +37,17 @@
 #include "Vex_Competition_Includes.c"
 
 float degToRad(float deg) {
-return (deg/180)*PI;
+	return (deg/180)*PI;
 }
 
 float mecSpeed(int side, float speed, float angle, float turn) {
 	writeDebugStreamLine("%d",speed*sin(angle+(PI/4))+turn);
 	if(side == 0) {
-			return speed*sin(angle+(PI/4))+turn;
-		}
-		else {
-			return speed*cos(angle+(PI/4))+turn;
-		}
+		return speed*sin(angle+(PI/4))+turn;
+	}
+	else {
+		return speed*cos(angle+(PI/4))+turn;
+	}
 }
 
 float stickAngle(float x, float y) {
@@ -55,13 +55,13 @@ float stickAngle(float x, float y) {
 }
 
 float pointDistance(float x1,float y1,float x2,float y2) {
-		return sqrt(pow(x1-x2,2)+pow(y1-y2,2));
+	return sqrt(pow(x1-x2,2)+pow(y1-y2,2));
 }
 float angle = stickAngle(VexRT[Ch1],vexRT[Ch2]);
-	float distance = pointDistance(VexRT[Ch1],vexRT[Ch2],0,0);
-	int baseSpeed = 100;
+float distance = pointDistance(VexRT[Ch1],vexRT[Ch2],0,0);
+int baseSpeed = 100;
 
-	float nSpeed = distance/127;
+float nSpeed = distance/127;
 int autonomousMode = 1;
 int driverControlModeCount = 1;
 
@@ -82,15 +82,17 @@ void DriverControls(){
 	motor[FR] = mecSpeed(1,nSpeed*baseSpeed,angle,-27*vexRT[Ch4]/127);
 	motor[BL] = mecSpeed(1,nSpeed*baseSpeed,angle,27*vexRT[Ch4]/127);
 
-	if( vexRT[ Btn6D ] == 1)
+	if( vexRT[ Btn6D ])
 	{
+		if(SensorValue[rightP] < 900;
 		motor[TLA] =127;
 		motor[TRA] = 127;
 		motor[BLA] = 127;
 		motor[BRA] = 127;
 	}
-	else if(vexRT[ Btn6U ] ==1)
+	else if(vexRT[ Btn6U ])
 	{
+		if(SensorValue[rightP] < 900;
 		motor[TLA] = -127;
 		motor[TRA] = -127;
 		motor[BLA] = -127;
@@ -115,23 +117,29 @@ void clearLCD ()
 //////////////////////////////////////////////autonomous
 void autonomous1 ()
 {
-
-		motor[FL] = -60;
-		motor[FR] = 60;
-		motor[BL] = 60;
-		motor[BR] = 60;
-		wait1Msec(5000);
-
-		/*motor[TLA] = 127;
+	motor[FL] = 127;
+	motor[FR] = 127;
+	motor[BL] = 127;
+	motor[BR] = 127;
+	wait1Msec(5000);
+	motor[FL] = mecSpeed(0,nSpeed*baseSpeed,angle,1);
+	motor[BR] = mecSpeed(0,nSpeed*baseSpeed,angle,-1);
+	motor[FR] = mecSpeed(1,nSpeed*baseSpeed,angle,-1);
+	motor[BL] = mecSpeed(1,nSpeed*baseSpeed,angle,1);
+	wait1Msec(500);
+	if(SensorValue[rightP] < 100) {
+		motor[TLA] =127;
 		motor[TRA] = 127;
 		motor[BLA] = 127;
 		motor[BRA] = 127;
-		wait1Msec(500);*/
-
-		driveDirectipon(60,degToRad(90.0),0);
-		wait1Msec(10000);
-
 }
+	else(SensorValue[rightP] < 3000); {
+		motor[TLA] =0;
+		motor[TRA] = 0;
+		motor[BLA] = 0;
+		motor[BRA] = 0;
+			wait1Msec(50);
+}}
 void autonomous2 ()
 {
 }
