@@ -9,7 +9,7 @@
 #pragma config(Sensor, dgtl9,  limitSwitch,    sensorTouch)
 #pragma config(Sensor, dgtl10, Bumper,         sensorTouch)
 #pragma config(Motor,  port1,           FR,            tmotorVex393_HBridge, openLoop, reversed)
-#pragma config(Motor,  port2,           BL,            tmotorVex393_MC29, openLoop)
+#pragma config(Motor,  port2,           BL,            tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port3,           FL,            tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port4,           L1A,           tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port5,           L2A,           tmotorVex393_MC29, openLoop, reversed)
@@ -38,53 +38,19 @@
 
 #include "Vex_Competition_Includes.c"
 
-float degToRad(float deg) {
-	return (deg/180)*PI;
-}
 
-float mecSpeed(int side, float speed, float angle, float turn) {
-	writeDebugStreamLine("%d",speed*sin(angle+(PI/4))+turn);
-	if(side == 0) {
-		return speed*sin(angle+(PI/4))+turn;
-	}
-	else {
-		return speed*cos(angle+(PI/4))+turn;
-	}
-}
 
-float stickAngle(float x, float y) {
-	return atan2(x,y);
-}
-
-float pointDistance(float x1,float y1,float x2,float y2) {
-	return sqrt(pow(x1-x2,2)+pow(y1-y2,2));
-}
-
-int autonomousMode = 1;
-int driverControlModeCount = 1;
-
-void driveDirectipon(float dspeed, float dangle, float dturn){
-	motor[FL] = mecSpeed(0,dspeed,dangle,dturn);
-	motor[BR] = mecSpeed(0,dspeed,dangle,-1*dturn);
-	motor[FR] = mecSpeed(1,dspeed,dangle,-1*dturn);
-	motor[BL] = mecSpeed(1,dspeed,dangle,dturn);
-}
 
 //driveDirection(127,degToRad(90),0); // -1/2PI to got left
 
 //////////////////////////////////////////////DriverControl
-void DriverControls(){
-	float angle = stickAngle(VexRT[Ch1],vexRT[Ch2]);
-	float distance = pointDistance(VexRT[Ch1],vexRT[Ch2],0,0);
-	int baseSpeed = 127;
-
-	float nSpeed = distance/(127/2);
-
-
-	motor[FL] = mecSpeed(0,nSpeed*baseSpeed,angle,127*vexRT[Ch4]/127);
-	motor[BR] = mecSpeed(0,nSpeed*baseSpeed,angle,-127*vexRT[Ch4]/127);
-	motor[FR] = mecSpeed(1,nSpeed*baseSpeed,angle,-127*vexRT[Ch4]/127);
-	motor[BL] = mecSpeed(1,nSpeed*baseSpeed,angle,127*vexRT[Ch4]/127);
+void TankDrive()
+{{
+motor[FL]=Vexrt[ch3];
+motor[FR]=vexRT[Ch2];
+motor[Bl]=vexRT[CH2];
+motor[BR]=vexRT[Ch3]:
+}
 
 	if( vexRT[ Btn6D ])
 	{
@@ -109,15 +75,9 @@ void DriverControls(){
 		motor[L2A] = 0;
 		motor[R1A] = 0;
 		motor[R2A] = 0;
+
 }}
-////////////////////////////////////////////////////////////////////////clearLCD
-void clearLCD ()
-{bLCDBacklight = true;
-	clearLCDLine(0);
-	clearLCDLine(1);
-	SensorValue[leftBase] = 0;
-	SensorValue[rightBase] = 0;
-}
+
 //////////////////////////////////////////////autonomous
 void autonomous1 ()
 {
@@ -466,7 +426,7 @@ task usercontrol()
 	startTask(driverControlViewValues);
 	while (true)
 	{
-		DriverControls();
+		TankDrive ();
 
 		if ((driverControlModeCount==3&&nLCDButtons==2)||vexRT[Btn7R]==1)
 		{
