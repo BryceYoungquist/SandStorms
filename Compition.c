@@ -8,8 +8,8 @@
 #pragma config(Sensor, dgtl7,  rightSonar,     sensorSONAR_mm)
 #pragma config(Sensor, dgtl9,  limitSwitch,    sensorTouch)
 #pragma config(Sensor, dgtl10, Bumper,         sensorTouch)
-#pragma config(Motor,  port1,           FR,            tmotorVex393_HBridge, openLoop, reversed)
-#pragma config(Motor,  port2,           BL,            tmotorVex393_MC29, openLoop, reversed)
+#pragma config(Motor,  port1,           FR,            tmotorVex393_HBridge, openLoop)
+#pragma config(Motor,  port2,           BL,            tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port3,           FL,            tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port4,           L1A,           tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port5,           L2A,           tmotorVex393_MC29, openLoop, reversed)
@@ -26,6 +26,9 @@
 #pragma competitionControl(Competition)
 #pragma autonomousDuration(20)
 #pragma userControlDuration(120)
+
+int autonomousMode = 1;
+int driverControlModeCount = 1;
 
 #include "Vex_Competition_Includes.c"   //Main competition background code...do not modify!
 #pragma DebuggerWindows("VexLCD")
@@ -48,8 +51,8 @@ void TankDrive()
 {{
 motor[FL]=Vexrt[ch3];
 motor[FR]=vexRT[Ch2];
-motor[Bl]=vexRT[CH2];
-motor[BR]=vexRT[Ch3]:
+motor[Bl]=vexRT[CH3];
+motor[BR]=vexRT[Ch2]:
 }
 
 	if( vexRT[ Btn6D ])
