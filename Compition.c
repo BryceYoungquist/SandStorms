@@ -41,7 +41,13 @@ int driverControlModeCount = 1;
 
 #include "Vex_Competition_Includes.c"
 
-
+void clearLCD ()
+{bLCDBacklight = true;
+	clearLCDLine(0);
+	clearLCDLine(1);
+	SensorValue[leftBase] = 0;
+	SensorValue[rightBase] = 0;
+}
 
 
 //driveDirection(127,degToRad(90),0); // -1/2PI to got left
@@ -135,7 +141,11 @@ void autonomous12 ()
 void autonomousSelection ()
 {
 	////////////////////////////////////////////////ClearLCD
-	clearLCD ();
+
+
+
+clearLCD();
+
 	while (nLCDButtons != 2)
 	{
 		displayLCDCenteredString(0,"Autonomous");
