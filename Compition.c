@@ -90,16 +90,13 @@ motor[BR]=vexRT[Ch2]:
 //////////////////////////////////////////////autonomous
 void autonomous1 ()
 {
-	SensorValue[leftBase] = 0;
-	SensorValue[rightBase] = 0;
+	motor[BR]=-127;
+	motor[FL]=-127;
+	motor[FR]=-127;
+	motor[BL]=-127;
 
-	while(SensorValue[leftBase] < 4.37)
-	{
-		motor[BL]=63;
-		motor[FL]=63;
-		motor[BR]=63;
-		motor[FR]=63;
-	}
+	wait1Msec(500);
+
 
 
 }
