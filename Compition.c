@@ -95,10 +95,14 @@ void autonomous1 ()
 	motor[FR]=-127;
 	motor[BL]=-127;
 
-	wait1Msec(500);
+	wait1Msec(1000);
 
+		motor[L1A] = 127;
+		motor[L2A] = 127;
+		motor[R1A] = 127;
+		motor[R2A] = 127;
 
-
+		wait1Msec(500);
 }
 
 void autonomous2 ()
